@@ -27,7 +27,6 @@
 | days_to_shipping_id | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null:false, foreign_keys: true |
-| purchased_item      | references | null:false                     |
 
 ### Association
 belongs_to :user
@@ -48,7 +47,12 @@ has_one :shippingto
 | Column         | Type       | Options                         |
 | -------------- | ---------- | ------------------------------- |
 | purchased_item | references | null: false, foreign_keys: true |
-| shipping_to    | integer    | null:false                      |
+| postal_code    | integer    | null: false                     |
+| prefecture     | string     | null: false                     |
+| city           | string     | null: false                     |
+| address        | string     | null: false                     |
+| building       | string     |                                 |
+| phone_number   | integer    | null: false                     |
 
 ### Association
 belongs_to :purchaseditem
