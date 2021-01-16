@@ -18,10 +18,10 @@
 ## itemsテーブル
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
-| item_name           | string     | null: false                    |
+| name                | string     | null: false                    |
 | description         | text       | null: false                    |
-| item_category_id    | integer    | null: false                    |
-| item_status_id      | integer    | null: false                    |
+| category_id         | integer    | null: false                    |
+| status_id           | integer    | null: false                    |
 | delivery_fee_id     | integer    | null: false                    |
 | prefecture_id       | integer    | null: false                    |
 | days_to_shipping_id | integer    | null: false                    |
@@ -41,13 +41,13 @@ has_one :purchaseditem
 ### Association
 belongs_to :user
 belongs_to :item
-has_one :shippingto
+has_one :address
 
-## ShippngToテーブル
+## Addressテーブル
 | Column         | Type       | Options                         |
 | -------------- | ---------- | ------------------------------- |
 | purchased_item | references | null: false, foreign_keys: true |
-| postal_code    | integer    | null: false                     |
+| postal_code    | string     | null: false                     |
 | prefecture_id  | integer    | null: false                     |
 | city           | string     | null: false                     |
 | address        | string     | null: false                     |
