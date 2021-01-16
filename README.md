@@ -13,7 +13,7 @@
 
 ### Association
 - has_many :items
-- has_many :purchaseditems
+- has_many :purchased_items
 
 ## itemsテーブル
 | Column              | Type       | Options                        |
@@ -30,7 +30,7 @@
 
 ### Association
 belongs_to :user
-has_one :purchaseditem
+has_one :purchased_item
 
 ## PurchasedItemsテーブル
 | Column      | Type       | Options                         |
@@ -43,7 +43,7 @@ belongs_to :user
 belongs_to :item
 has_one :address
 
-## Addressテーブル
+## Addressesテーブル
 | Column         | Type       | Options                         |
 | -------------- | ---------- | ------------------------------- |
 | purchased_item | references | null: false, foreign_keys: true |
@@ -55,4 +55,4 @@ has_one :address
 | phone_number   | string     | null: false                     |
 
 ### Association
-belongs_to :purchaseditem
+belongs_to :purchased_item
