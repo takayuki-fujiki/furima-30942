@@ -23,7 +23,7 @@
 | item_category_id    | integer    | null: false                    |
 | item_status_id      | integer    | null: false                    |
 | delivery_fee_id     | integer    | null: false                    |
-| shipping_from_id    | integer    | null: false                    |
+| prefecture_id       | integer    | null: false                    |
 | days_to_shipping_id | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null:false, foreign_keys: true |
@@ -48,11 +48,11 @@ has_one :shippingto
 | -------------- | ---------- | ------------------------------- |
 | purchased_item | references | null: false, foreign_keys: true |
 | postal_code    | integer    | null: false                     |
-| prefecture     | string     | null: false                     |
+| prefecture_id  | string     | null: false                     |
 | city           | string     | null: false                     |
 | address        | string     | null: false                     |
 | building       | string     |                                 |
-| phone_number   | integer    | null: false                     |
+| phone_number   | string     | null: false                     |
 
 ### Association
 belongs_to :purchaseditem
