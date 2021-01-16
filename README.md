@@ -48,7 +48,7 @@ has_one :shippingto
 | -------------- | ---------- | ------------------------------- |
 | purchased_item | references | null: false, foreign_keys: true |
 | postal_code    | integer    | null: false                     |
-| prefecture_id  | string     | null: false                     |
+| prefecture_id  | integer    | null: false                     |
 | city           | string     | null: false                     |
 | address        | string     | null: false                     |
 | building       | string     |                                 |
