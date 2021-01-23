@@ -8,11 +8,11 @@ describe User do
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
       it "nicknameとemail、passwordとpassword_confirmation、漢字カナ氏名、誕生日が存在すれば登録できる" do
-        expect(@user).to be_valid
+      expect(@user).to be_valid
       end
       it "passwordが６文字以上であれば登録できる" do
-        @user.password = "123456"
-        @user.password_confirmation = "123456"
+        @user.password = "123ABc"
+        @user.password_confirmation = "123ABc"
         expect(@user).to be_valid
       end
     end
@@ -40,6 +40,26 @@ describe User do
       @user.password = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
+    end
+
+    it "パスワードが半角英語のみでは登録できない" do
+      @user.password = "asdfgh"
+      @user.password_confirmation = "asdfgh"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
+    it "パスワードが数字のみでは登録できない" do
+      @user.password = "123456"
+      @user.password_confirmation = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
+    it "パスワードは全角英数混合では登録できない" do
+      @user.password = "あいう１２３"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
 
     it "パスワード確認が空では登録できない" do
