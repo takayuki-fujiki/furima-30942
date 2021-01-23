@@ -74,10 +74,22 @@ describe User do
       expect(@user.errors.full_messages).to include("Last name jp can't be blank")
     end
 
-    it "名前名字が空では登録できない" do
+    it "名字は全角（漢字・ひらがな・カタカナ）でないと登録できない" do
+      @user.last_name_JP = "Abc123"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name jp is invalid")
+    end
+
+    it "名前が空では登録できない" do
       @user.first_name_JP = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("First name jp can't be blank")
+    end
+
+    it "名前は全角（漢字・ひらがな・カタカナ）でないと登録できない" do
+      @user.first_name_JP = "Abc123"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name jp is invalid")
     end
 
     it "カナ名字が空では登録できない" do
@@ -86,10 +98,22 @@ describe User do
       expect(@user.errors.full_messages).to include("Last name kana can't be blank")
     end
 
-    it "カナ名字が空では登録できない" do
+    it "名字のフリガナは全角カタカナでないと登録できない" do
+      @user.last_name_kana = "1月January"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
+    end
+
+    it "カナ名前が空では登録できない" do
       @user.first_name_kana = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana can't be blank")
+    end
+
+    it "名前のフリガナは全角カタカナでないと登録できない" do
+      @user.first_name_kana = "1月January"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
     end
 
     it "誕生日が空では登録できない" do
