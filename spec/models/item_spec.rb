@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe Item do
   before do
-    @user = FactoryBot.build(:user)
     @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('/Users/takayukifujiki/Downloads/xl883r.jpeg')
   end
@@ -27,6 +26,12 @@ describe Item do
       expect(@item.errors.full_messages).to include("Name can't be blank")
     end
 
+    it "descriptionが空では登録できない" do
+      @item.description = ""
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Description can't be blank")
+    end
+
     it "statusが空では登録できない" do
       @item.status_id = ""
       @item.valid?
@@ -37,6 +42,12 @@ describe Item do
       @item.category_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
+    end
+
+    it "prefectureが空では登録できない" do
+      @item.prefecture_id = ""
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Prefecture can't be blank")
     end
 
     it "daystoshippingが空では登録できない" do
