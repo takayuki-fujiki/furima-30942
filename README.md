@@ -22,9 +22,9 @@
 | description         | text       | null: false                    |
 | category_id         | integer    | null: false                    |
 | status_id           | integer    | null: false                    |
-| delivery_fee_id     | integer    | null: false                    |
+| deliveryfee_id      | integer    | null: false                    |
 | prefecture_id       | integer    | null: false                    |
-| days_to_shipping_id | integer    | null: false                    |
+| daystoshipping_id   | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null:false, foreign_keys: true |
 
