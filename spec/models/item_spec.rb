@@ -63,7 +63,7 @@ describe Item do
       expect(@item.errors.full_messages).to include("Price is not included in the list")
     end
 
-    it "priceがより大きくては登録できない" do
+    it "priceが9999999より大きくては登録できない" do
       @item.price = "10000000"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not included in the list")
