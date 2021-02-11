@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   validates :price, format: { with: /\A[0-9]+\z/ }, inclusion: { in: 300..9_999_999 }, numericality: true
 
 belongs_to :user
+has_one :purchaseditem
 has_one_attached :image
 
 extend ActiveHash::Associations::ActiveRecordExtensions
