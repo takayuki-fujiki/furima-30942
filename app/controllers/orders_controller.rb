@@ -1,11 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
   before_action :user_check, only: [:index]
 
   def index
     @order = Order.new
-    purchaseditem = Purchaseditem.new
-    address = Address.new
   end
 
   def new
@@ -17,7 +16,6 @@ class OrdersController < ApplicationController
     if @order.valid?
       order_pay
       @order.save
-      binding.pry
       redirect_to root_path
     else
       render 'index'
@@ -46,13 +44,12 @@ class OrdersController < ApplicationController
   end
 
   def user_check
-    if user_signed_in?
-      if @item.user_id == current_user.id
-        redirect_to root_path
-      elsif !@item.purchaseditem.nil?
-        redirect_to root_path
-      redirect_to new_user_session_path
-      end
+    if @item.user_id == current_user.id# || !@item.purchaseditem.nil?
+      redirect_to root_path
+    #else
+    elsif !@item.purchaseditem.nil?
+      redirect_to root_path
+    redirect_to new_user_session_path
     end
   end
 end
