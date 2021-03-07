@@ -55,4 +55,4 @@ has_one :address
 | phone_number   | string     | null: false                     |
 
 ### Association
-belongs_to :purchased_item
+belongs_to :purchased_item  

@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :user_check, only: [:edit, :update, :destroy]
 
   def index
-    @item = Item.order("created_at DESC")
+    @item = Item.order('created_at DESC')
   end
 
   def new
@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    #if @item.purchaseditem.nil?
+    # if @item.purchaseditem.nil?
   end
 
   def update
@@ -39,11 +39,12 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to root_path
   end
-  
 
   private
+
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :status_id, :deliveryfee_id, :prefecture_id, :daystoshipping_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :description, :category_id, :status_id, :deliveryfee_id, :prefecture_id,
+                                 :daystoshipping_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -51,8 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def user_check
-    if @item.user_id != current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.user_id != current_user.id
   end
 end
