@@ -1,14 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:index, :create]
+  before_action :user_check, only: [:index]
+
   def index
     @order = Order.new
-    @item = Item.find(params[:item_id])
     purchaseditem = Purchaseditem.new
     address = Address.new
-
-    user_check
-    #if @item.user_id == current_user.id || !@item.purchaseditem.nil? && @item.purchaseditem.item_id == @item.id
-    #  redirect_to root_path
-    #end
   end
 
   def new
@@ -16,12 +13,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
-    @user = current_user
     @order = Order.new(order_params)
     if @order.valid?
       order_pay
       @order.save
+      binding.pry
       redirect_to root_path
     else
       render 'index'
@@ -37,7 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def order_pay
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: order_params[:token],
@@ -45,14 +41,18 @@ class OrdersController < ApplicationController
     )
   end
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def user_check
     if user_signed_in?
-      if @item.user_id == current_user.id || !@item.purchaseditem.nil? && @item.purchaseditem.item_id == @item.id
+      if @item.user_id == current_user.id
         redirect_to root_path
-      else
+      elsif !@item.purchaseditem.nil?
+        redirect_to root_path
+      redirect_to new_user_session_path
       end
-    else
-      redirect_to root_path
     end
   end
 end
