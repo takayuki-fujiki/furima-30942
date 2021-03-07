@@ -6,9 +6,9 @@ class OrdersController < ApplicationController
     address = Address.new
 
     user_check
-    if @item.user_id == current_user.id || !@item.purchaseditem.nil? && @item.purchaseditem.item_id == @item.id
-      redirect_to root_path
-    end
+    #if @item.user_id == current_user.id || !@item.purchaseditem.nil? && @item.purchaseditem.item_id == @item.id
+    #  redirect_to root_path
+    #end
   end
 
   def new
@@ -47,6 +47,10 @@ class OrdersController < ApplicationController
 
   def user_check
     if user_signed_in?
+      if @item.user_id == current_user.id || !@item.purchaseditem.nil? && @item.purchaseditem.item_id == @item.id
+        redirect_to root_path
+      else
+      end
     else
       redirect_to root_path
     end
