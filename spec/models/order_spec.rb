@@ -2,10 +2,10 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   describe '注文情報の保存' do
     before do
-      @item = FactoryBot.create(:item)
-      @item.image = fixture_file_upload('/Users/takayukifujiki/Downloads/xl883r.jpeg')
       @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
       @order = FactoryBot.build(:order, user_id: @user.id, item_id: @item.id)
+      sleep 0.1
     end
 
     context '保存できるとき' do

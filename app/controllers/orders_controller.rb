@@ -44,12 +44,8 @@ class OrdersController < ApplicationController
   end
 
   def user_check
-    if @item.user_id == current_user.id# || !@item.purchaseditem.nil?
+    if @item.user_id == current_user.id || !@item.purchaseditem.nil?
       redirect_to root_path
-    #else
-    elsif !@item.purchaseditem.nil?
-      redirect_to root_path
-    redirect_to new_user_session_path
     end
   end
 end

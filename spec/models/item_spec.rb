@@ -3,7 +3,6 @@ require 'rails_helper'
 describe Item do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('/Users/takayukifujiki/Downloads/xl883r.jpeg')
   end
 
   describe '商品出品機能' do
