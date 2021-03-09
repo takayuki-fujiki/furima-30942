@@ -63,7 +63,7 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:deliveryfee_id, DeliveryFee.all, :id, :name, {prompt: "---"}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+        <%= f.collection_select(:deliveryfee_id, Deliveryfee.all, :id, :name, {prompt: "---"}, {class:"select-box", id:"item-shipping-fee-status"}) %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
@@ -73,7 +73,7 @@
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:daystoshipping_id, DaysToShipping.all, :id, :name, {prompt: "---"}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+        <%= f.collection_select(:daystoshipping_id, Daystoshipping.all, :id, :name, {prompt: "---"}, {class:"select-box", id:"item-scheduled-delivery"}) %>
       </div>
     </div>
 
