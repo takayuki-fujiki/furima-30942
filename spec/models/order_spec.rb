@@ -44,6 +44,11 @@ RSpec.describe Order, type: :model do
           @order.valid?
           expect(@order.errors.full_messages).to include("Prefecture can't be blank")
         end
+        it 'prefecture_idが0では保存できないこと' do
+          @order.prefecture_id = 0
+          @order.valid?
+          expect(@order.errors.full_messages).to include("Prefecture must be other than 0")
+        end
         it 'prefecture_idが半角数字以外では保存できないこと' do
           @order.prefecture_id = 'あああ'
           @order.valid?
